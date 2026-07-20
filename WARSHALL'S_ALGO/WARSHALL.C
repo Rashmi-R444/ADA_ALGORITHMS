@@ -4,12 +4,12 @@
 void printmat(int reach[V][V])
 {
     int i,j;
-    for(i = 0; i < V; i++)
+    printf("Transitive closure of a matrix\n");
+    for(i = 0; i < V;i++)
     {
-        for(j = 0; j < V; j++)
+        for(j = 0; j < V;j++)
         {
-            printf("%d\t",reach[i][j]);
-
+            printf("%d ",reach[i][j]);
         }
         printf("\n");
     }
@@ -17,39 +17,37 @@ void printmat(int reach[V][V])
 
 void warshall(int graph[V][V])
 {
-    int reach[V][V];
     int i,j,k;
-
-    for(i = 0; i < V; i++)
+    int reach[V][V];
+    for(i = 0;i <V;i++)
     {
-        for(j = 0; j < V; j++)
+        for(j=0;j<V;j++)
         {
-            reach[i][j] = (graph[i][j] != 0)?1:0;
+            reach[i][j] = (graph[i][j]!=0)?1:0;
         }
     }
 
-    for( k = 0; k <V; k++)
+    for(k = 0; k < V;k++)
     {
-        for(i = 0; i < V; i++)
+        for(i = 0; i <V;i++)
         {
-            for(j = 0; j < V; j++)
+            for(j = 0; j< V;j++)
             {
-                reach[i][j] = reach[i][j] || (reach[i][k] && reach[k][j]);
+                reach[i][j] = reach[i][j] || (reach[i][k]&&reach[k][j]);
             }
         }
     }
-
     printmat(reach);
-
 }
 
 int main()
 {
-    int graph[V][V]={{0, 1, 0, 1},
-{1, 0, 0, 1},
-{0, 1, 0, 0},{0,0,1,0}};
+            int graph[V][V] = {
+    {0, 1, 1, 1},
+    {1, 0, 0, 1},
+    {0, 1, 0, 1},
+    {0,0,0,0}};
+
     warshall(graph);
     return 0;
-
 }
-
